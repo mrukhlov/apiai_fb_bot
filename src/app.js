@@ -138,8 +138,8 @@ const generic_message = {
                 }, {
                     type: "postback",
                     title: "Call Postback",
-                    payload: "Payload for first bubble",
-                }],
+                    payload: "Payload for first bubble"
+                }]
             }, {
                 title: "touch",
                 subtitle: "Your Hands, Now in VR",
@@ -152,7 +152,7 @@ const generic_message = {
                 }, {
                     type: "postback",
                     title: "Call Postback",
-                    payload: "Payload for second bubble",
+                    payload: "Payload for second bubble"
                 }]
             }]
         }

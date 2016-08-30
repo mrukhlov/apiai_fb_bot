@@ -121,12 +121,12 @@ function chunkString(s, len) {
     return output;
 }
 
-const message_gen = {
+const generic_message = {
     attachment: {
         type: "template",
-            payload: {
+        payload: {
             template_type: "generic",
-                elements: [{
+            elements: [{
                 title: "rift",
                 subtitle: "Next-generation virtual reality",
                 item_url: "https://www.oculus.com/en-us/rift/",
@@ -157,7 +157,7 @@ const message_gen = {
             }]
         }
     }
-}
+};
 
 function sendFBMessage(sender, messageData, callback) {
     console.log(sender);
@@ -167,8 +167,8 @@ function sendFBMessage(sender, messageData, callback) {
         method: 'POST',
         json: {
             recipient: {id: sender},
-            //message: messageData
-            message: message_gen
+            message: messageData
+            //message: message_gen
         }
     }, (error, response, body) => {
         if (error) {

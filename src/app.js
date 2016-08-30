@@ -127,6 +127,25 @@ const generic_message = {
         payload: {
             template_type: "generic",
             elements: [{
+                title: "Margarita",
+                subtitle: "Be carefull and don't eat your fingers!!!",
+                item_url: "https://en.wikipedia.org/wiki/Pizza",
+                image_url: "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg",
+                buttons: [{
+                    type: "web_url",
+                    url: "https://en.wikipedia.org/wiki/Pizza",
+                    title: "Open Web URL"
+                }/*, {
+                    type: "postback",
+                    title: "Call Postback",
+                    payload: "Payload for first bubble"
+                }*/]
+            }
+    /*attachment: {
+        type: "template",
+        payload: {
+            template_type: "generic",
+            elements: [{
                 title: "rift",
                 subtitle: "Next-generation virtual reality",
                 item_url: "https://www.oculus.com/en-us/rift/",
@@ -154,21 +173,21 @@ const generic_message = {
                     title: "Call Postback",
                     payload: "Payload for second bubble"
                 }]
-            }]
+            }*/]
         }
     }
 };
 
 function sendFBMessage(sender, messageData, callback) {
-    console.log(sender);
+    //console.log(sender);
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: FB_PAGE_ACCESS_TOKEN},
         method: 'POST',
         json: {
             recipient: {id: sender},
-            message: messageData
-            //message: message_gen
+            //message: messageData
+            message: generic_message
         }
     }, (error, response, body) => {
         if (error) {

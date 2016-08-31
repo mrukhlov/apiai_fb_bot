@@ -326,6 +326,7 @@ app.post('/webhook/', (req, res) => {
 app.post('/webhook_apiai/', (req, res) => {
     try {
         var data = JSONbig.parse(req.body);
+        console.log(data);
         switch(data.result.parameters.pizza_type){
             case 'Margherita':
                 generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;

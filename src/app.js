@@ -297,6 +297,7 @@ app.post('/webhook/', (req, res) => {
                 let messaging_events = entry.messaging;
                 if (messaging_events) {
                     messaging_events.forEach((event) => {
+                        console.log(event);
                         if (event.message && !event.message.is_echo ||
                             event.postback && event.postback.payload) {
                             processEvent(event);

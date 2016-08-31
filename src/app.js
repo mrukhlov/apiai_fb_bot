@@ -74,6 +74,7 @@ function processEvent(event) {
                     var splittedText = splitResponse(responseText);
                     switch (action){
                         case 'show_prod':
+                            console.log('generic');
                             const generic_message = {
                                 attachment: {
                                     type: "template",
@@ -99,6 +100,7 @@ function processEvent(event) {
                             };
                             sendFBMessage(sender, generic_message, null);
                         default:
+                            console.log('default');
                             async.eachSeries(splittedText, (textPart, callback) => {
                                 sendFBMessage(sender, {text: textPart}, callback);
                             });

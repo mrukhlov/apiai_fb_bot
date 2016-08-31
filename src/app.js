@@ -334,7 +334,7 @@ app.post('/webhook_apiai/', (req, res) => {
                         generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
                         generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
                 }
-            case 'show_weather':
+            /*case 'show_weather':
                 if(!data.result.parameters['geo-city'] != true){
                     generic_message.attachment.payload.elements[0].title = 'weather';
                     var city = data.result.parameters['geo-city'];
@@ -364,11 +364,8 @@ app.post('/webhook_apiai/', (req, res) => {
                             generic_message.attachment.payload.elements[0].buttons[0].url = channel.link;
                         }
                     });
-                } else {
-                    generic_message = {text:'please tell me the city'}
-                }
+                }*/
         }
-        console.log(JSON.stringify(generic_message));
         return res.status(200).json({
             data: {
                 facebook: generic_message

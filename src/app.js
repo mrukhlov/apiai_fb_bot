@@ -23,7 +23,7 @@ const generic_message = {
         payload: {
             template_type: "generic",
             elements: [{
-                title: "Margarita",
+                title: "Fresh Pizza",
                 subtitle: "Be carefull and don't eat your fingers!!!",
                 item_url: "https://en.wikipedia.org/wiki/Pizza",
                 //image_url: "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg",
@@ -327,7 +327,11 @@ app.post('/webhook_apiai/', (req, res) => {
     try {
         var data = JSONbig.parse(req.body);
         console.log(data);
-
+        switch(data.result.parameters.pizza_type){
+            case 'Margherita':
+                generic_message.attachment.payload.elements.title = data.result.parameters.pizza_type;
+                generic_message.attachment.payload.elements.image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
+        }
         return res.status(200).json({
             speech: data.result.resolvedQuery,
             displayText: 'displayText',

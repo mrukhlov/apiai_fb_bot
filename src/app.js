@@ -37,7 +37,7 @@ function processEvent(event) {
 
         apiaiRequest.on('response', (response) => {
             if (isDefined(response.result)) {
-                console.log('aaa');
+                //asd
                 let responseText = response.result.fulfillment.speech;
                 let responseData = response.result.fulfillment.data;
                 let action = response.result.action;
@@ -327,9 +327,9 @@ app.post('/webhook_apiai/', (req, res) => {
         return res.status(200).json({
             speech: data.result.resolvedQuery,
             displayText: 'displayText',
-            /*data: {
-                facebook: 'asd'
-            }*/
+            data: {
+                facebook: true,
+            }
         })
     } catch (err) {
         return res.status(400).json({

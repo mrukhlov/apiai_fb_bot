@@ -323,7 +323,7 @@ app.post('/webhook_apiai/', (req, res) => {
         console.log(data);
 
         return res.status(200).json({
-            speech: 'test',
+            speech: data.result.resolvedQuery,
             displayText: 'displayText',
             /*data: {
                 facebook: 'asd'

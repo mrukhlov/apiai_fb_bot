@@ -334,7 +334,7 @@ app.post('/webhook_apiai/', (req, res) => {
         }
         return res.status(200).json({
             data: {
-                facebook: generic_message,
+                facebook: generic_message
             }
         })
     } catch (err) {

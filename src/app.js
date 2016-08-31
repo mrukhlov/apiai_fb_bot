@@ -66,7 +66,8 @@ function processEvent(event) {
                             }
                         });
                     }
-                } else if (isDefined(responseText)) {
+                //} else if (isDefined(responseText)) {
+                } else if (isDefined(action)) {
                     console.log('Response as text message');
                     // facebook API limit for text length is 320,
                     // so we must split message if needed

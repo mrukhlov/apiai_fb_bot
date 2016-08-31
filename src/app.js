@@ -41,7 +41,9 @@ function processEvent(event) {
                 let responseText = response.result.fulfillment.speech;
                 let responseData = response.result.fulfillment.data;
                 let action = response.result.action;
+                console.log(responseText);
                 console.log(responseData);
+                console.log(action);
                 if (isDefined(responseData) && isDefined(responseData.facebook)) {
                     if (!Array.isArray(responseData.facebook)) {
                         try {
@@ -319,6 +321,7 @@ app.post('/webhook_apiai/', (req, res) => {
     try {
         var data = JSONbig.parse(req.body);
         console.log(data);
+
         return res.status(200).json({
             speech: 'test',
             displayText: 'displayText',

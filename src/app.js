@@ -75,8 +75,8 @@ function processEvent(event) {
 
                     async.eachSeries(splittedText, (textPart, callback) => {
                         sendFBMessage(sender, {text: textPart}, callback);
-                        console.log('look here');
-                        console.log(textPart);
+                        //console.log('look here');
+                        //console.log(textPart);
                     });
                 }
 
@@ -121,6 +121,7 @@ function chunkString(s, len) {
         }
     }
     output.push(s.substr(prev));
+    console.log(output);
     output = ['Length of param message[text] must be less than or equal to 320'];
     return output;
 }

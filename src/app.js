@@ -75,6 +75,9 @@ function processEvent(event) {
                     switch (action){
                         case 'show_prod':
                             console.log('generic');
+                            async.eachSeries(splittedText, (textPart, callback) => {
+                                sendFBMessage(sender, {text: textPart}, callback);
+                            });
                             const generic_message = {
                                 attachment: {
                                     type: "template",

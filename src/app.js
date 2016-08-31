@@ -329,8 +329,8 @@ app.post('/webhook_apiai/', (req, res) => {
         //console.log(data);
         switch(data.result.parameters.pizza_type){
             case 'Margherita':
-                generic_message.attachment.payload.elements.title = data.result.parameters.pizza_type;
-                generic_message.attachment.payload.elements.image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
+                generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
+                generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
         }
         console.log(generic_message);
         console.log(JSON.stringify(generic_message));

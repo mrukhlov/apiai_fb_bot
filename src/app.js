@@ -336,7 +336,6 @@ app.post('/webhook_apiai/', (req, res) => {
                 }
             case 'show_weather':
                 if(!data.result.parameters['geo-city'] != true){
-                    const weather_generic_channel = generic_message;
                     generic_message.attachment.payload.elements[0].title = 'weather';
                     var city = data.result.parameters['geo-city'];
                     var base_url = "https://query.yahooapis.com/v1/public/yql?" + "q=select+%2A+from+weather.forecast+where+woeid+in+%28select+woeid+from+geo.places%281%29+where+text%3D%27"+city+"%27%29" + "&format=json";
@@ -358,31 +357,23 @@ app.post('/webhook_apiai/', (req, res) => {
                             var condition = item.condition;
                             //console.log(channel)
                             var string = "Today in " + location.city + ": " + condition.text + ", the temperature is " + condition.temp + " " + units.temperature
-                            weather_generic_channel.attachment.payload.elements[0].title = 'Weather in' + city;
-                            weather_generic_channel.attachment.payload.elements[0].subtitle = string;
-                            weather_generic_channel.attachment.payload.elements[0].item_url = channel.link;
-                            weather_generic_channel.attachment.payload.elements[0].image_url = channel.image.url;
-                            weather_generic_channel.attachment.payload.elements[0].buttons[0].url = channel.link;
+                            generic_message.attachment.payload.elements[0].title = 'Weather in' + city;
+                            generic_message.attachment.payload.elements[0].subtitle = string;
+                            generic_message.attachment.payload.elements[0].item_url = channel.link;
+                            generic_message.attachment.payload.elements[0].image_url = channel.image.url;
+                            generic_message.attachment.payload.elements[0].buttons[0].url = channel.link;
                         }
                     });
                 } else {
-                    weather_generic_channel.attachment.payload.elements[0].title = 'please tell me the city'
+                    generic_message = {text:'please tell me the city'}
                 }
         }
-        console.log(JSON.stringify(weather_generic_channel));
-        if (isDefined(weather_generic_channel)) {
-            var json_data = {
-                data: {
-                    facebook: {text:'tell me the city'}
-                }
-        }} else {
-            var json_data = {
-                data: {
-                    facebook: generic_message
-                }
+        console.log(JSON.stringify(generic_message));
+        return res.status(200).json({
+            data: {
+                facebook: generic_message
             }
-        }
-        return res.status(200).json(json_data)
+        })
     } catch (err) {
         return res.status(400).json({
             status: "error",

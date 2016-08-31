@@ -316,7 +316,7 @@ app.post('/webhook/', (req, res) => {
 });
 
 app.post('/webhook_apiai/', (req, res) => {
-    console.log('aaa');
+    console.log(res);
 });
 
 app.listen(REST_PORT, () => {

@@ -324,7 +324,6 @@ app.post('/webhook/', (req, res) => {
 });
 
 app.post('/webhook_apiai/', (req, res) => {
-    const weather_generic_channel = generic_message;
     try {
         var data = JSONbig.parse(req.body);
         //console.log(data);
@@ -337,6 +336,7 @@ app.post('/webhook_apiai/', (req, res) => {
                 }
             case 'show_weather':
                 if(!data.result.parameters['geo-city'] != true){
+                    const weather_generic_channel = generic_message;
                     generic_message.attachment.payload.elements[0].title = 'weather';
                     var city = data.result.parameters['geo-city'];
                     var base_url = "https://query.yahooapis.com/v1/public/yql?" + "q=select+%2A+from+weather.forecast+where+woeid+in+%28select+woeid+from+geo.places%281%29+where+text%3D%27"+city+"%27%29" + "&format=json";
@@ -373,9 +373,9 @@ app.post('/webhook_apiai/', (req, res) => {
         if (isDefined(weather_generic_channel)) {
             var json_data = {
                 data: {
-                    facebook: weather_generic_channel
+                    facebook: {text:'tell me the city'}
                 }
-            }} else {
+        }} else {
             var json_data = {
                 data: {
                     facebook: generic_message

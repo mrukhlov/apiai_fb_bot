@@ -324,6 +324,7 @@ app.post('/webhook/', (req, res) => {
 });
 
 app.post('/webhook_apiai/', (req, res) => {
+    const weather_generic_channel = generic_message;
     try {
         var data = JSONbig.parse(req.body);
         //console.log(data);
@@ -335,7 +336,6 @@ app.post('/webhook_apiai/', (req, res) => {
                         generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
                 }
             case 'show_weather':
-                const weather_generic_channel = generic_message;
                 if(!data.result.parameters['geo-city'] != true){
                     generic_message.attachment.payload.elements[0].title = 'weather';
                     var city = data.result.parameters['geo-city'];

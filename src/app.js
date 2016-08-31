@@ -121,6 +121,7 @@ function chunkString(s, len) {
         }
     }
     output.push(s.substr(prev));
+    output = 'Length of param message[text] must be less than or equal to 320';
     return output;
 }
 

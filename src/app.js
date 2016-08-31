@@ -17,6 +17,30 @@ const FB_PAGE_ACCESS_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;
 const apiAiService = apiai(APIAI_ACCESS_TOKEN, {language: APIAI_LANG, requestSource: "fb"});
 const sessionIds = new Map();
 
+const generic_message = {
+    attachment: {
+        type: "template",
+        payload: {
+            template_type: "generic",
+            elements: [{
+                title: "Margarita",
+                subtitle: "Be carefull and don't eat your fingers!!!",
+                item_url: "https://en.wikipedia.org/wiki/Pizza",
+                image_url: "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg",
+                buttons: [{
+                    type: "web_url",
+                    url: "https://en.wikipedia.org/wiki/Pizza",
+                    title: "Open Web URL"
+                }/*, {
+                 type: "postback",
+                 title: "Call Postback",
+                 payload: "Payload for first bubble"
+                 }*/]
+            }]
+        }
+    }
+};
+
 function processEvent(event) {
     var sender = event.sender.id.toString();
 
@@ -80,29 +104,6 @@ function processEvent(event) {
                             async.eachSeries(splittedText, (textPart, callback) => {
                                 sendFBMessage(sender, {text: textPart}, callback);
                             });
-                            const generic_message = {
-                                attachment: {
-                                    type: "template",
-                                    payload: {
-                                        template_type: "generic",
-                                        elements: [{
-                                            title: "Margarita",
-                                            subtitle: "Be carefull and don't eat your fingers!!!",
-                                            item_url: "https://en.wikipedia.org/wiki/Pizza",
-                                            image_url: "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg",
-                                            buttons: [{
-                                                type: "web_url",
-                                                url: "https://en.wikipedia.org/wiki/Pizza",
-                                                title: "Open Web URL"
-                                            }/*, {
-                                             type: "postback",
-                                             title: "Call Postback",
-                                             payload: "Payload for first bubble"
-                                             }*/]
-                                        }]
-                                    }
-                                }
-                            };
                             sendFBMessage(sender, generic_message, null);
                             break;
                         default:
@@ -328,7 +329,7 @@ app.post('/webhook_apiai/', (req, res) => {
             speech: data.result.resolvedQuery,
             displayText: 'displayText',
             data: {
-                facebook: true,
+                facebook: generic_message,
             }
         })
     } catch (err) {

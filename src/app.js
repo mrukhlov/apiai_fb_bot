@@ -99,6 +99,7 @@ function processEvent(event) {
                                 }
                             };
                             sendFBMessage(sender, generic_message, null);
+                            break;
                         default:
                             console.log('default');
                             async.eachSeries(splittedText, (textPart, callback) => {

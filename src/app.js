@@ -360,6 +360,7 @@ app.post('/webhook_apiai/', (req, res) => {
                             generic_message.attachment.payload.elements[0].item_url = channel.link;
                             generic_message.attachment.payload.elements[0].image_url = channel.image.url;
                             generic_message.attachment.payload.elements[0].buttons[0].url = channel.link;
+                            console.log(JSON.stringify(generic_message))
                         }
                     });
                 }

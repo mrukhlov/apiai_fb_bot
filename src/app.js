@@ -336,7 +336,6 @@ app.post('/webhook_apiai/', (req, res) => {
                 }
             case 'show_weather':
                 if(!data.result.parameters['geo-city'] != true){
-                    console.log('here');
                     var city = data.result.parameters['geo-city'];
                     var base_url = "https://query.yahooapis.com/v1/public/yql?" + "q=select+%2A+from+weather.forecast+where+woeid+in+%28select+woeid+from+geo.places%281%29+where+text%3D%27"+city+"%27%29" + "&format=json";
                     request({
@@ -346,6 +345,7 @@ app.post('/webhook_apiai/', (req, res) => {
                         if(error) {
                             console.log(error);
                         } else {
+                            console.log('here');
                             //console.log(response.statusCode, body);
                             var query = JSON.parse(body).query;
                             var results = query.results;
@@ -364,7 +364,7 @@ app.post('/webhook_apiai/', (req, res) => {
                         }
                     });
                 } else {
-                    generic_message = {text:'asd'}
+                    generic_message = {text:'please tell me the city'}
                 }
         }
         console.log(JSON.stringify(generic_message));

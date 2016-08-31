@@ -335,6 +335,11 @@ app.post('/webhook_apiai/', (req, res) => {
                         generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
                         generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
                 }
+                return res.status(200).json({
+                    data: {
+                        facebook: generic_message
+                    }
+                })
             case 'show_weather':
                 if(data.result.parameters['geo-city']){
                     var city = data.result.parameters['geo-city'];
@@ -362,15 +367,15 @@ app.post('/webhook_apiai/', (req, res) => {
                             generic_message.attachment.payload.elements[0].item_url = channel.link;
                             generic_message.attachment.payload.elements[0].image_url = channel.image.url;
                             generic_message.attachment.payload.elements[0].buttons[0].url = channel.link;
+                            return res.status(200).json({
+                                data: {
+                                    facebook: generic_message
+                                }
+                            })
                         }
                     });
                 }
         }
-        return res.status(200).json({
-            data: {
-                facebook: generic_message
-            }
-        })
     } catch (err) {
         return res.status(400).json({
             status: "error",

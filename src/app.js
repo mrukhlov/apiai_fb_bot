@@ -364,8 +364,6 @@ app.post('/webhook_apiai/', (req, res) => {
                             generic_message.attachment.payload.elements[0].buttons[0].url = channel.link;
                         }
                     });
-                } else {
-                    generic_message.attachment.payload.elements[0].title = 'Weather';
                 }
         }
         return res.status(200).json({

@@ -75,7 +75,8 @@ function processEvent(event) {
 
                     async.eachSeries(splittedText, (textPart, callback) => {
                         sendFBMessage(sender, {text: textPart}, callback);
-                        console.log(textPart)
+                        console.log('look here');
+                        console.log(textPart);
                     });
                 }
 

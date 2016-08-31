@@ -370,11 +370,19 @@ app.post('/webhook_apiai/', (req, res) => {
                 }
         }
         console.log(JSON.stringify(weather_generic_channel));
-        return res.status(200).json({
-            data: {
-                facebook: generic_message
+        if (isDefined(weather_generic_channel)) {
+            var json_data = {
+                data: {
+                    facebook: weather_generic_channel
+                }
+            }} else {
+            var json_data = {
+                data: {
+                    facebook: generic_message
+                }
             }
-        })
+        }
+        return res.status(200).json(json_data)
     } catch (err) {
         return res.status(400).json({
             status: "error",

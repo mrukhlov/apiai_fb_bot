@@ -287,7 +287,7 @@ app.get('/webhook/', (req, res) => {
 app.post('/webhook/', (req, res) => {
     try {
         var data = JSONbig.parse(req.body);
-        console.log(date);
+
         if (data.entry) {
             let entries = data.entry;
             entries.forEach((entry) => {

@@ -17,7 +17,7 @@ const FB_PAGE_ACCESS_TOKEN = process.env.FB_PAGE_ACCESS_TOKEN;
 const apiAiService = apiai(APIAI_ACCESS_TOKEN, {language: APIAI_LANG, requestSource: "fb"});
 const sessionIds = new Map();
 
-const generic_message = {
+var generic_message = {
     attachment: {
         type: "template",
         payload: {
@@ -363,6 +363,8 @@ app.post('/webhook_apiai/', (req, res) => {
                             generic_message.attachment.payload.elements[0].buttons[0].url = channel.link;
                         }
                     });
+                } else {
+                    generic_message = {text:'asd'}
                 }
         }
         console.log(JSON.stringify(generic_message));

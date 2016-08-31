@@ -97,11 +97,12 @@ function processEvent(event) {
                                     }
                                 }
                             };
-                            splittedText = generic_message;
+                            sendFBMessage(sender, generic_message, callback);
+                        default:
+                            async.eachSeries(splittedText, (textPart, callback) => {
+                                sendFBMessage(sender, {text: textPart}, callback);
+                            });
                     }
-                    async.eachSeries(splittedText, (textPart, callback) => {
-                        sendFBMessage(sender, {text: textPart}, callback);
-                    });
                 }
 
             }

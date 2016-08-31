@@ -65,9 +65,9 @@ function processEvent(event) {
                 let responseText = response.result.fulfillment.speech;
                 let responseData = response.result.fulfillment.data;
                 let action = response.result.action;
-                console.log(responseText);
+                /*console.log(responseText);
                 console.log(responseData);
-                console.log(action);
+                console.log(action);*/
                 if (isDefined(responseData) && isDefined(responseData.facebook)) {
                     if (!Array.isArray(responseData.facebook)) {
                         try {
@@ -294,14 +294,14 @@ app.post('/webhook/', (req, res) => {
     try {
         var data = JSONbig.parse(req.body);
         var asd = data;
-        console.log(asd);
+        //console.log(asd);
         if (data.entry) {
             let entries = data.entry;
             entries.forEach((entry) => {
                 let messaging_events = entry.messaging;
                 if (messaging_events) {
                     messaging_events.forEach((event) => {
-                        console.log(event);
+                        //console.log(event);
                         if (event.message && !event.message.is_echo ||
                             event.postback && event.postback.payload) {
                             processEvent(event);
@@ -326,7 +326,7 @@ app.post('/webhook/', (req, res) => {
 app.post('/webhook_apiai/', (req, res) => {
     try {
         var data = JSONbig.parse(req.body);
-        console.log(data);
+        //console.log(data);
         switch(data.result.parameters.pizza_type){
             case 'Margherita':
                 generic_message.attachment.payload.elements.title = data.result.parameters.pizza_type;

@@ -326,7 +326,7 @@ app.post('/webhook/', (req, res) => {
 app.post('/webhook_apiai/', (req, res) => {
     try {
         var data = JSONbig.parse(req.body);
-        console.log(data);
+        //console.log(data);
         switch(data.result.action){
             case 'show_prod':
                 switch(data.result.parameters.pizza_type){
@@ -335,7 +335,34 @@ app.post('/webhook_apiai/', (req, res) => {
                         generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
                 }
             case 'show_weather':
-                console.log(data);
+                if(!data.result.parameters['geo-city'] != true){
+                    var city = data.result.parameters['geo-city'];
+                    var base_url = "https://query.yahooapis.com/v1/public/yql?" + "q=select+%2A+from+weather.forecast+where+woeid+in+%28select+woeid+from+geo.places%281%29+where+text%3D%27"+city+"%27%29" + "&format=json";
+                    request({
+                        url: base_url,
+                        method: 'GET', //Specify the method
+                    }, function(error, response, body){
+                        if(error) {
+                            console.log(error);
+                        } else {
+                            //console.log(response.statusCode, body);
+                            var query = JSON.parse(body).query;
+                            var results = query.results;
+                            var channel = results.channel;
+                            var item = channel.item;
+                            var location = channel.location;
+                            var units = channel.units;
+                            var condition = item.condition;
+                            //console.log(channel)
+                            var string = "Today in " + location.city + ": " + condition.text + ", the temperature is " + condition.temp + " " + units.temperature
+                            generic_message.attachment.payload.elements[0].title = 'Weather in' + city;
+                            generic_message.attachment.payload.elements[0].subtitle = string;
+                            generic_message.attachment.payload.elements[0].item_url = channel.link;
+                            generic_message.attachment.payload.elements[0].image_url = channel.image.url;
+                            generic_message.attachment.payload.elements[0].buttons[0].url = channel.link;
+                        }
+                    });
+                }
         }
         return res.status(200).json({
             data: {

@@ -316,7 +316,19 @@ app.post('/webhook/', (req, res) => {
 });
 
 app.post('/webhook_apiai/', (req, res) => {
-    console.log(res);
+    try {
+        var data = JSONbig.parse(req.body);
+        console.log(data);
+        return res.status(200).json({
+            speech: 'test',
+            displayText: 'displayText'
+        })
+    } catch (err) {
+        return res.status(400).json({
+            status: "error",
+            error: err
+        });
+    }
 });
 
 app.listen(REST_PORT, () => {

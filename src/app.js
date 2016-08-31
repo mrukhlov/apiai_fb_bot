@@ -326,7 +326,7 @@ app.post('/webhook/', (req, res) => {
 app.post('/webhook_apiai/', (req, res) => {
     try {
         var data = JSONbig.parse(req.body);
-        //console.log(data);
+        console.log(data);
         switch(data.result.action){
             case 'show_prod':
                 switch(data.result.parameters.pizza_type){

@@ -321,7 +321,10 @@ app.post('/webhook_apiai/', (req, res) => {
         console.log(data);
         return res.status(200).json({
             speech: 'test',
-            displayText: 'displayText'
+            displayText: 'displayText',
+            data: {
+                facebook: 'asd'
+            }
         })
     } catch (err) {
         return res.status(400).json({

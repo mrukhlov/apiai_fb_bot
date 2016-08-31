@@ -97,7 +97,7 @@ function processEvent(event) {
                                     }
                                 }
                             };
-                            sendFBMessage(sender, generic_message, callback);
+                            sendFBMessage(sender, generic_message, null);
                         default:
                             async.eachSeries(splittedText, (textPart, callback) => {
                                 sendFBMessage(sender, {text: textPart}, callback);

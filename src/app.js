@@ -72,7 +72,35 @@ function processEvent(event) {
                     // facebook API limit for text length is 320,
                     // so we must split message if needed
                     var splittedText = splitResponse(responseText);
-                    console.log(splittedText.length);
+                    switch (action){
+                        case 'show_prod':
+                            const generic_message = {
+                                attachment: {
+                                    type: "template",
+                                    payload: {
+                                        template_type: "generic",
+                                        elements: [{
+                                            title: "Margarita",
+                                            subtitle: "Be carefull and don't eat your fingers!!!",
+                                            item_url: "https://en.wikipedia.org/wiki/Pizza",
+                                            image_url: "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg",
+                                            buttons: [{
+                                                type: "web_url",
+                                                url: "https://en.wikipedia.org/wiki/Pizza",
+                                                title: "Open Web URL"
+                                            }/*, {
+                                             type: "postback",
+                                             title: "Call Postback",
+                                             payload: "Payload for first bubble"
+                                             }*/]
+                                        }]
+                                    }
+                                }
+                            };
+                            splittedText = generic_message;
+                        default:
+                            pass
+                    }
                     async.eachSeries(splittedText, (textPart, callback) => {
                         sendFBMessage(sender, {text: textPart}, callback);
                     });

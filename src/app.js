@@ -287,8 +287,7 @@ app.get('/webhook/', (req, res) => {
 app.post('/webhook/', (req, res) => {
     try {
         var data = JSONbig.parse(req.body);
-        var asd = data;
-        console.log(asd);
+
         if (data.entry) {
             let entries = data.entry;
             entries.forEach((entry) => {
@@ -314,6 +313,10 @@ app.post('/webhook/', (req, res) => {
         });
     }
 
+});
+
+app.post('/webhook_apiai/', (req, res) => {
+    console.log('aaa');
 });
 
 app.listen(REST_PORT, () => {

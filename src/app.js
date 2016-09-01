@@ -392,13 +392,13 @@ app.post('/webhook_apiai/', (req, res) => {
                 break;
         }
         console.log(weather_query);
-        if (weather_query != true){
+        /*if (weather_query != true){
             return res.status(200).json({
                 data: {
                     facebook: generic_message
                 }
             })
-        } else {}
+        } else {}*/
     } catch (err) {
         return res.status(400).json({
             status: "error",

@@ -42,8 +42,8 @@ function processEvent(event) {
                 let responseData = response.result.fulfillment.data;
                 let action = response.result.action;
                 /*console.log(responseText);
-                console.log(responseData);
-                console.log(action);*/
+                 console.log(responseData);
+                 console.log(action);*/
                 if (isDefined(responseData) && isDefined(responseData.facebook)) {
                     if (!Array.isArray(responseData.facebook)) {
                         try {
@@ -68,26 +68,26 @@ function processEvent(event) {
                             }
                         });
                     }
-                //} else if (isDefined(responseText)) {
+                    //} else if (isDefined(responseText)) {
                 } else if (isDefined(action) && isDefined(responseText)) {
                     console.log('Response as text message');
                     // facebook API limit for text length is 320,
                     // so we must split message if needed
                     var splittedText = splitResponse(responseText);
                     /*switch (action){
-                        case 'show_prod':
-                            console.log('generic');
-                            async.eachSeries(splittedText, (textPart, callback) => {
-                                sendFBMessage(sender, {text: textPart}, callback);
-                            });
-                            sendFBMessage(sender, generic_message, null);
-                            break;
-                        default:
-                            console.log('default');
-                            async.eachSeries(splittedText, (textPart, callback) => {
-                                sendFBMessage(sender, {text: textPart}, callback);
-                            });
-                    }*/
+                     case 'show_prod':
+                     console.log('generic');
+                     async.eachSeries(splittedText, (textPart, callback) => {
+                     sendFBMessage(sender, {text: textPart}, callback);
+                     });
+                     sendFBMessage(sender, generic_message, null);
+                     break;
+                     default:
+                     console.log('default');
+                     async.eachSeries(splittedText, (textPart, callback) => {
+                     sendFBMessage(sender, {text: textPart}, callback);
+                     });
+                     }*/
                     async.eachSeries(splittedText, (textPart, callback) => {
                         sendFBMessage(sender, {text: textPart}, callback);
                     });
@@ -140,42 +140,42 @@ function chunkString(s, len) {
 }
 
 /*const generic_message = {
-    attachment: {
-        type: "template",
-        payload: {
-            template_type: "generic",
-            elements: [{
-                title: "rift",
-                subtitle: "Next-generation virtual reality",
-                item_url: "https://www.oculus.com/en-us/rift/",
-                image_url: "http://messengerdemo.parseapp.com/img/rift.png",
-                buttons: [{
-                    type: "web_url",
-                    url: "https://www.oculus.com/en-us/rift/",
-                    title: "Open Web URL"
-                }, {
-                    type: "postback",
-                    title: "Call Postback",
-                    payload: "Payload for first bubble"
-                }]
-            }, {
-                title: "touch",
-                subtitle: "Your Hands, Now in VR",
-                item_url: "https://www.oculus.com/en-us/touch/",
-                image_url: "http://messengerdemo.parseapp.com/img/touch.png",
-                buttons: [{
-                    type: "web_url",
-                    url: "https://www.oculus.com/en-us/touch/",
-                    title: "Open Web URL"
-                }, {
-                    type: "postback",
-                    title: "Call Postback",
-                    payload: "Payload for second bubble"
-                }]
-            }]
-        }
-    }
-};*/
+ attachment: {
+ type: "template",
+ payload: {
+ template_type: "generic",
+ elements: [{
+ title: "rift",
+ subtitle: "Next-generation virtual reality",
+ item_url: "https://www.oculus.com/en-us/rift/",
+ image_url: "http://messengerdemo.parseapp.com/img/rift.png",
+ buttons: [{
+ type: "web_url",
+ url: "https://www.oculus.com/en-us/rift/",
+ title: "Open Web URL"
+ }, {
+ type: "postback",
+ title: "Call Postback",
+ payload: "Payload for first bubble"
+ }]
+ }, {
+ title: "touch",
+ subtitle: "Your Hands, Now in VR",
+ item_url: "https://www.oculus.com/en-us/touch/",
+ image_url: "http://messengerdemo.parseapp.com/img/touch.png",
+ buttons: [{
+ type: "web_url",
+ url: "https://www.oculus.com/en-us/touch/",
+ title: "Open Web URL"
+ }, {
+ type: "postback",
+ title: "Call Postback",
+ payload: "Payload for second bubble"
+ }]
+ }]
+ }
+ }
+ };*/
 
 function sendFBMessage(sender, messageData, callback) {
     //console.log(sender);
@@ -302,8 +302,7 @@ app.post('/webhook/', (req, res) => {
 app.post('/webhook_apiai/', (req, res) => {
 
     //var weather_query = new Boolean(false);
-    var weather_query = 'false';
-    weather_query = false;
+    var weather_query = false;
 
     const generic_message = {
         attachment: {
@@ -340,11 +339,6 @@ app.post('/webhook_apiai/', (req, res) => {
                         generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
                         generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
                 }
-                return res.status(200).json({
-                    data: {
-                        facebook: generic_message
-                    }
-                });
                 break;
             case 'show_weather':
                 console.log('weather');
@@ -356,14 +350,14 @@ app.post('/webhook_apiai/', (req, res) => {
                     request({
                         url: base_url,
                         method: 'GET',
-                        //headers: {Content-Type:'application/x-www-form-urlencoded'},
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         contentType :'application/x-www-form-urlencoded',
                     }, function(error, response, body){
                         if(error) {
                             console.log(error);
                             return res.status(400).json({
                                 status: "error",
-                                error: err
+                                error: error
                             });
                         } else {
                             var query = JSON.parse(body).query;
@@ -392,18 +386,18 @@ app.post('/webhook_apiai/', (req, res) => {
                         data: {
                             facebook: {text: 'no city'}
                         }
-                    })}
-                weather_query = false;
+                    });
+                }
                 break;
         }
         console.log(weather_query);
-        /*if (weather_query != true){
+        if (weather_query != true) {
             return res.status(200).json({
                 data: {
                     facebook: generic_message
                 }
-            })
-        } else {}*/
+            });
+        }
     } catch (err) {
         return res.status(400).json({
             status: "error",

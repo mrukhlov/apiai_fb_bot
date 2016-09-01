@@ -345,7 +345,7 @@ app.post('/webhook_apiai/', (req, res) => {
                         generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
                 }
             case 'show_weather':
-                weather_query = true;
+                //weather_query = true;
                 if(data.result.parameters['geo-city']){
                     var city = data.result.parameters['geo-city'];
                     var base_url = "https://query.yahooapis.com/v1/public/yql?" + "q=select+%2A+from+weather.forecast+where+woeid+in+%28select+woeid+from+geo.places%281%29+where+text%3D%27"+city+"%27%29" + "&format=json";

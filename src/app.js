@@ -304,6 +304,7 @@ app.post('/webhook_apiai/', (req, res) => {
     var weather_query = new Boolean(false);
     //weather_query = false;
     console.log(weather_query);
+    console.log(Boolean(weather_query));
 
     const generic_message = {
         attachment: {

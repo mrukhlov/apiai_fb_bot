@@ -387,18 +387,23 @@ app.post('/webhook_apiai/', (req, res) => {
                         case 'Margherita':
                             generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
                             generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
+                            break;
                         case 'HAWAIIAN CHICKEN':
                             generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(HAWAIIAN_CHICKEN);
+                            break;
                         case 'CHICKEN PEPPERONI':
                             generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(CHICKEN_PEPPERONI);
+                            break;
                         case 'TROPICAL CHICKEN':
                             generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(TROPICAL_CHICKEN);
+                            break;
                         case 'SPICY TUNA':
                             generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(SPICY_TUNA);
+                            break;
                     }
                 } else {
                     generic_message.attachment.payload.elements.push(HAWAIIAN_CHICKEN, CHICKEN_PEPPERONI, TROPICAL_CHICKEN, SPICY_TUNA);
@@ -456,7 +461,7 @@ app.post('/webhook_apiai/', (req, res) => {
                         }
                     });
                 }
-                break;
+            break;
         }
         console.log(weather_query);
         if (weather_query != true) {

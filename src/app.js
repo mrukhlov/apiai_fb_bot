@@ -375,7 +375,7 @@ app.post('/webhook_apiai/', (req, res) => {
                                 data: {
                                     facebook: generic_message
                                 }
-                            })
+                            });
                         }
                     });
                 } else {

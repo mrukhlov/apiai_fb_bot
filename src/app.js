@@ -396,10 +396,10 @@ app.post('/webhook_apiai/', (req, res) => {
                         case 'SPICY TUNA':
                             generic_message.attachment.payload.elements.push(SPICY_TUNA);
                     }
-                    //break;
                 } else {
                     generic_message.attachment.payload.elements.push(HAWAIIAN_CHICKEN, CHICKEN_PEPPERONI, TROPICAL_CHICKEN, SPICY_TUNA);
                 }
+            break;
             case 'show_weather':
                 console.log('weather');
 

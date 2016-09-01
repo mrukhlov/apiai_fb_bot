@@ -302,8 +302,7 @@ app.post('/webhook/', (req, res) => {
 app.post('/webhook_apiai/', (req, res) => {
 
     //var weather_query = new Boolean(false);
-    var weather_query = 'false';
-    weather_query = false;
+    var weather_query = false;
 
     const generic_message = {
         attachment: {
@@ -351,14 +350,14 @@ app.post('/webhook_apiai/', (req, res) => {
                     request({
                         url: base_url,
                         method: 'GET',
-                        headers: {'Content-Type', 'application/x-www-form-urlencoded'},
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         contentType :'application/x-www-form-urlencoded',
                     }, function(error, response, body){
                         if(error) {
                             console.log(error);
                             return res.status(400).json({
                                 status: "error",
-                                error: err
+                                error: error
                             });
                         } else {
                             var query = JSON.parse(body).query;
@@ -387,18 +386,18 @@ app.post('/webhook_apiai/', (req, res) => {
                         data: {
                             facebook: {text: 'no city'}
                         }
-                    })}
-                weather_query = false;
+                    });
+                }
                 break;
         }
         console.log(weather_query);
-        if (weather_query != true){
+        if (weather_query != true) {
             return res.status(200).json({
                 data: {
                     facebook: generic_message
                 }
-            })
-        } else {}
+            });
+        }
     } catch (err) {
         return res.status(400).json({
             status: "error",

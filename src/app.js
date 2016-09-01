@@ -454,7 +454,7 @@ app.post('/webhook_apiai/', (req, res) => {
                 }
                 break;
         }*/
-        console/log(weather_query);
+        console.log(weather_query);
         if (weather_query != true) {
             return res.status(200).json({
                 data: {

@@ -332,6 +332,9 @@ app.post('/webhook_apiai/', (req, res) => {
 
     try {
         weather_query = false;
+        console.log(weather_query);
+        weather_query = 'false';
+        console.log(weather_query);
         var data = JSONbig.parse(req.body);
         //console.log(data);
         switch(data.result.action){

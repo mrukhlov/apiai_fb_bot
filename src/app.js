@@ -333,7 +333,6 @@ app.post('/webhook_apiai/', (req, res) => {
         //console.log(data);
         switch(data.result.action){
             case 'show_prod':
-                console.log('pizza');
                 switch(data.result.parameters.pizza_type){
                     case 'Margherita':
                         generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
@@ -341,7 +340,6 @@ app.post('/webhook_apiai/', (req, res) => {
                 }
                 break;
             case 'show_weather':
-                console.log('weather');
                 weather_query = 'true';
                 if(isDefined(data.result.parameters['geo-city']) == true){
                     var city = data.result.parameters['geo-city'];
@@ -387,7 +385,7 @@ app.post('/webhook_apiai/', (req, res) => {
                 weather_query = 'false';
                 break;
         }
-
+        c
         if (weather_query != 'true'){
             return res.status(200).json({
                 data: {

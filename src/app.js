@@ -388,12 +388,16 @@ app.post('/webhook_apiai/', (req, res) => {
                             generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
                             generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
                         case 'HAWAIIAN CHICKEN':
+                            generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(HAWAIIAN_CHICKEN);
                         case 'CHICKEN PEPPERONI':
+                            generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(CHICKEN_PEPPERONI);
                         case 'TROPICAL CHICKEN':
+                            generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(TROPICAL_CHICKEN);
                         case 'SPICY TUNA':
+                            generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(SPICY_TUNA);
                     }
                 } else {

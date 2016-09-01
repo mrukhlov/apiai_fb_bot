@@ -376,7 +376,7 @@ app.post('/webhook_apiai/', (req, res) => {
     };
 
     try {
-        generic_message.push(HAWAIIAN_CHICKEN, CHICKEN_PEPPERONI, TROPICAL_CHICKEN, SPICY_TUNA);
+        //generic_message.push(HAWAIIAN_CHICKEN, CHICKEN_PEPPERONI, TROPICAL_CHICKEN, SPICY_TUNA);
         var data = JSONbig.parse(req.body);
         //console.log(data);
         switch(data.result.action){

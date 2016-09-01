@@ -340,6 +340,8 @@ app.post('/webhook_apiai/', (req, res) => {
                 }
             case 'show_weather':
                 weather_query = 'true';
+                console.log(data.result.parameters['geo-city']);
+                console.log(isDefined(data.result.parameters['geo-city']));
                 if(data.result.parameters['geo-city']){
                     var city = data.result.parameters['geo-city'];
                     var base_url = "https://query.yahooapis.com/v1/public/yql?" + "q=select+%2A+from+weather.forecast+where+woeid+in+%28select+woeid+from+geo.places%281%29+where+text%3D%27"+city+"%27%29" + "&format=json";

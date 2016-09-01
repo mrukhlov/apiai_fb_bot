@@ -382,6 +382,8 @@ app.post('/webhook_apiai/', (req, res) => {
                     });
                 }
         }
+        console.log('end');
+        console.log(weather_query);
         console.log(Boolean(weather_query));
         if (weather_query != true){
             return res.status(200).json({

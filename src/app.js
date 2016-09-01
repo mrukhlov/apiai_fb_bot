@@ -373,11 +373,13 @@ app.post('/webhook_apiai/', (req, res) => {
                     });
                 }
         }
-        return res.status(200).json({
-            data: {
-                facebook: generic_message
-            }
-        })
+        if (weather_query== false){
+            return res.status(200).json({
+                data: {
+                    facebook: generic_message
+                }
+            })
+        }
     } catch (err) {
         return res.status(400).json({
             status: "error",

@@ -303,8 +303,6 @@ app.post('/webhook_apiai/', (req, res) => {
 
     //var weather_query = new Boolean(false);
     var weather_query = 'false';
-    console.log(weather_query);
-    console.log(Boolean(weather_query));
 
     const generic_message = {
         attachment: {
@@ -356,8 +354,6 @@ app.post('/webhook_apiai/', (req, res) => {
                                 error: err
                             });
                         } else {
-                            console.log(weather_query);
-                            //console.log(response.statusCode, body);
                             var query = JSON.parse(body).query;
                             var results = query.results;
                             var channel = results.channel;
@@ -383,9 +379,7 @@ app.post('/webhook_apiai/', (req, res) => {
                 weather_query = 'false';
                 break;
         }
-        console.log('end');
-        console.log(weather_query);
-        //console.log(Boolean(weather_query));
+
         if (weather_query != 'true'){
             return res.status(200).json({
                 data: {

@@ -396,12 +396,7 @@ app.post('/webhook_apiai/', (req, res) => {
                     facebook: generic_message
                 }
             })
-        } else {
-            return res.status(200).json({
-                data: {
-                    facebook: {text: 'error'}
-                }
-            })}
+        } else {}
     } catch (err) {
         return res.status(400).json({
             status: "error",

@@ -381,6 +381,7 @@ app.post('/webhook_apiai/', (req, res) => {
         switch(data.result.action){
             case 'show_pizza':
                 console.log('pizza');
+                generic_message.push(HAWAIIAN_CHICKEN, CHICKEN_PEPPERONI, TROPICAL_CHICKEN, SPICY_TUNA);
                 if(isDefined(data.result.parameters['pizza_type']) == true){
                     switch(data.result.parameters.pizza_type){
                         case 'Margherita':

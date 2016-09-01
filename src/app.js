@@ -351,7 +351,7 @@ app.post('/webhook_apiai/', (req, res) => {
                     request({
                         url: base_url,
                         method: 'GET',
-                        headers: {'Content-Type', 'application/x-www-form-urlencoded'},
+                        //headers: {Content-Type:'application/x-www-form-urlencoded'},
                         contentType :'application/x-www-form-urlencoded',
                     }, function(error, response, body){
                         if(error) {

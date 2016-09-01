@@ -343,8 +343,12 @@ app.post('/webhook_apiai/', (req, res) => {
             case 'show_weather':
                 console.log('weather');
 
-                if(isDefined(data.result.parameters['geo-city']) == true){
-                    var city = data.result.parameters['geo-city'];
+                if(isDefined(data.result.parameters['geo-city']) == true || isDefined(data.result.contexts.parameters['geo-city']) == true){
+                    if (isDefined(data.result.parameters['geo-city']) == true) {
+                        var city = data.result.parameters['geo-city'];
+                    } else {
+                        var city = data.result.parameters.contexts['geo-city'];
+                    }
                     var base_url = "https://query.yahooapis.com/v1/public/yql?" + "q=select+%2A+from+weather.forecast+where+woeid+in+%28select+woeid+from+geo.places%281%29+where+text%3D%27"+city+"%27%29" + "&format=json";
                     weather_query = true;
                     request({

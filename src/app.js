@@ -379,14 +379,9 @@ app.post('/webhook_apiai/', (req, res) => {
         var data = JSONbig.parse(req.body);
         //console.log(data);
         switch(data.result.action){
-            case 'show_prod':
+            case 'show_pizza':
                 console.log('pizza');
-                switch(data.result.parameters.pizza_type){
-                    case 'Margherita':
-                        generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
-                        generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
-                }
-                break;
+                generic_message.push(HAWAIIAN_CHICKEN, CHICKEN_PEPPERONI, TROPICAL_CHICKEN, SPICY_TUNA);
             case 'show_weather':
                 console.log('weather');
 

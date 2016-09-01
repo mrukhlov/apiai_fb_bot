@@ -391,18 +391,26 @@ app.post('/webhook_apiai/', (req, res) => {
                         case 'HAWAIIAN CHICKEN':
                             generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(HAWAIIAN_CHICKEN);
+                            generic_message.attachment.payload.elements[0].buttons[0].title = 'Go back';
+                            generic_message.attachment.payload.elements[0].buttons[0].payload = 'pizza';
                             break;
                         case 'CHICKEN PEPPERONI':
                             generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(CHICKEN_PEPPERONI);
+                            generic_message.attachment.payload.elements[0].buttons[0].title = 'Go back';
+                            generic_message.attachment.payload.elements[0].buttons[0].payload = 'pizza';
                             break;
                         case 'TROPICAL CHICKEN':
                             generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(TROPICAL_CHICKEN);
+                            generic_message.attachment.payload.elements[0].buttons[0].title = 'Go back';
+                            generic_message.attachment.payload.elements[0].buttons[0].payload = 'pizza';
                             break;
                         case 'SPICY TUNA':
                             generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(SPICY_TUNA);
+                            generic_message.attachment.payload.elements[0].buttons[0].title = 'Go back';
+                            generic_message.attachment.payload.elements[0].buttons[0].payload = 'pizza';
                             break;
                     }
                 } else {

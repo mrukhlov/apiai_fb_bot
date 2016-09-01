@@ -376,12 +376,12 @@ app.post('/webhook_apiai/', (req, res) => {
     };
 
     try {
-        var data = JSONbig.parse(req.body);
+        generic_message.push(HAWAIIAN_CHICKEN, CHICKEN_PEPPERONI, TROPICAL_CHICKEN, SPICY_TUNA);
+        /*var data = JSONbig.parse(req.body);
         //console.log(data);
         switch(data.result.action){
             case 'show_pizza':
                 console.log('pizza');
-                generic_message.push(HAWAIIAN_CHICKEN, CHICKEN_PEPPERONI, TROPICAL_CHICKEN, SPICY_TUNA);
                 if(isDefined(data.result.parameters['pizza_type']) == true){
                     switch(data.result.parameters.pizza_type){
                         case 'Margherita':
@@ -453,8 +453,8 @@ app.post('/webhook_apiai/', (req, res) => {
                     });
                 }
                 break;
-        }
-        console.log(weather_query);
+        }*/
+        console/log(weather_query);
         if (weather_query != true) {
             return res.status(200).json({
                 data: {

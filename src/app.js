@@ -350,7 +350,9 @@ app.post('/webhook_apiai/', (req, res) => {
                     weather_query = true;
                     request({
                         url: base_url,
-                        method: 'GET'
+                        method: 'GET',
+                        headers: {'Content-Type', 'application/x-www-form-urlencoded'},
+                        contentType :'application/x-www-form-urlencoded',
                     }, function(error, response, body){
                         if(error) {
                             console.log(error);

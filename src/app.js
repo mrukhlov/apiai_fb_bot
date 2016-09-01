@@ -309,23 +309,70 @@ app.post('/webhook_apiai/', (req, res) => {
             type: "template",
             payload: {
                 template_type: "generic",
-                elements: [{
-                    title: "Fresh Pizza",
-                    subtitle: "Be carefull and don't eat your fingers!!!",
-                    item_url: "https://en.wikipedia.org/wiki/Pizza",
-                    //image_url: "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg",
-                    buttons: [{
-                        type: "web_url",
-                        url: "https://en.wikipedia.org/wiki/Pizza",
-                        title: "Open Web URL"
-                    }/*, {
-                     type: "postback",
-                     title: "Call Postback",
-                     payload: "Payload for first bubble"
-                     }*/]
-                }]
+                elements: []
             }
         }
+    };
+
+    var HAWAIIAN_CHICKEN = {
+        title: "HAWAIIAN CHICKEN",
+        subtitle: "Chicken meat, juicy pineapples and Mozzarella cheese on tomato pizza sauce.",
+        item_url: "https://en.wikipedia.org/wiki/Pizza",
+        image_url: "http://www.phdelivery.com.my/i/menu/pizza/pizza_hawaiianchicken.jpg",
+        buttons: [/*{
+         type: "web_url",
+         url: "https://en.wikipedia.org/wiki/Pizza",
+         title: "Open Web URL"
+         },*/ {
+            type: "postback",
+            title: "Show HAWAIIAN CHICKEN",
+            payload: "HAWAIIAN CHICKEN"
+        }]
+    };
+    var CHICKEN_PEPPERONI = {
+        title: "CHICKEN PEPPERONI",
+        subtitle: "Chicken pepperoni topped with mozzarella cheese and tomato pizza sauce.",
+        item_url: "https://en.wikipedia.org/wiki/Pizza",
+        image_url: "http://www.phdelivery.com.my/i/menu/pizza/pizza_chickenpepperoni.jpg",
+        buttons: [/*{
+         type: "web_url",
+         url: "https://en.wikipedia.org/wiki/Pizza",
+         title: "Open Web URL"
+         },*/ {
+            type: "postback",
+            title: "Show CHICKEN PEPPERONI",
+            payload: "CHICKEN PEPPERONI"
+        }]
+    };
+    var TROPICAL_CHICKEN = {
+        title: "TROPICAL CHICKEN",
+        subtitle: "Sliced chicken rolls and pineapples accompanied by tomato pizza sauce.",
+        item_url: "https://en.wikipedia.org/wiki/Pizza",
+        image_url: "http://www.phdelivery.com.my/i/menu/pizza/pizza_tropicalchicken.jpg",
+        buttons: [/*{
+         type: "web_url",
+         url: "https://en.wikipedia.org/wiki/Pizza",
+         title: "Open Web URL"
+         },*/ {
+            type: "postback",
+            title: "Show TROPICAL CHICKEN",
+            payload: "TROPICAL CHICKEN"
+        }]
+    };
+    var SPICY_TUNA = {
+        title: "SPICY TUNA",
+        subtitle: "Tuna and onion on a sambal sauce.",
+        item_url: "https://en.wikipedia.org/wiki/Pizza",
+        image_url: "http://www.phdelivery.com.my/i/menu/pizza/pizza_spicytuna.jpg",
+        buttons: [/*{
+         type: "web_url",
+         url: "https://en.wikipedia.org/wiki/Pizza",
+         title: "Open Web URL"
+         },*/ {
+            type: "postback",
+            title: "Show SPICY TUNA",
+            payload: "SPICY TUNA"
+        }]
     };
 
     try {

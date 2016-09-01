@@ -301,6 +301,11 @@ app.post('/webhook/', (req, res) => {
 
 app.post('/webhook_apiai/', (req, res) => {
 
+    var weather_query = new Boolean(false);
+    weather_query = 'false';
+    console.log(weather_query);
+    console.log(Boolean(weather_query));
+
     const generic_message = {
         attachment: {
             type: "template",
@@ -326,12 +331,6 @@ app.post('/webhook_apiai/', (req, res) => {
     };
 
     try {
-
-        var weather_query = new Boolean(false);
-        weather_query = false;
-        console.log(weather_query);
-        console.log(Boolean(weather_query));
-
         weather_query = false;
         var data = JSONbig.parse(req.body);
         //console.log(data);
@@ -339,7 +338,6 @@ app.post('/webhook_apiai/', (req, res) => {
             case 'show_prod':
                 switch(data.result.parameters.pizza_type){
                     case 'Margherita':
-                        weather_query = false;
                         generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
                         generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
                 }

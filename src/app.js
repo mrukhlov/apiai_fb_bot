@@ -303,6 +303,7 @@ app.post('/webhook_apiai/', (req, res) => {
 
     //var weather_query = new Boolean(false);
     var weather_query = 'false';
+    weather_query = false;
 
     const generic_message = {
         attachment: {
@@ -342,10 +343,11 @@ app.post('/webhook_apiai/', (req, res) => {
                 break;
             case 'show_weather':
                 console.log('weather');
-                weather_query = 'true';
+
                 if(isDefined(data.result.parameters['geo-city']) == true){
                     var city = data.result.parameters['geo-city'];
                     var base_url = "https://query.yahooapis.com/v1/public/yql?" + "q=select+%2A+from+weather.forecast+where+woeid+in+%28select+woeid+from+geo.places%281%29+where+text%3D%27"+city+"%27%29" + "&format=json";
+                    weather_query = true;
                     request({
                         url: base_url,
                         method: 'GET'
@@ -384,11 +386,11 @@ app.post('/webhook_apiai/', (req, res) => {
                             facebook: {text: 'no city'}
                         }
                     })}
-                weather_query = 'false';
+                weather_query = false;
                 break;
         }
         console.log(weather_query);
-        if (weather_query != 'true'){
+        if (weather_query != true){
             return res.status(200).json({
                 data: {
                     facebook: generic_message

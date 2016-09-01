@@ -328,17 +328,26 @@ app.post('/webhook_apiai/', (req, res) => {
         }
     };
 
+    function return_res(res, data){
+        return res.status(200).json({
+            data: {
+                facebook: date
+            }
+        })}
+
     try {
         var data = JSONbig.parse(req.body);
         //console.log(data);
         switch(data.result.action){
             case 'show_prod':
+                console.log('pizza');
                 switch(data.result.parameters.pizza_type){
                     case 'Margherita':
                         generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
                         generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
                 }
             case 'show_weather':
+                console.log('weather');
                 weather_query = 'true';
                 if(isDefined(data.result.parameters['geo-city']) == true){
                     var city = data.result.parameters['geo-city'];
@@ -368,35 +377,21 @@ app.post('/webhook_apiai/', (req, res) => {
                             generic_message.attachment.payload.elements[0].item_url = channel.link;
                             generic_message.attachment.payload.elements[0].image_url = channel.image.url;
                             generic_message.attachment.payload.elements[0].buttons[0].url = channel.link;
-                            return res.status(200).json({
-                                data: {
-                                    facebook: generic_message
-                                }
-                            })
+                            return_res(res, generic_message)
                         }
                     });
                 } else {
-                    return res.status(200).json({
-                        data: {
-                            facebook: {text: 'no city'}
-                        }
-                    })}
+                    return_res(res, {text: 'no city'});
+                }
                 weather_query = 'false';
                 break;
         }
 
         if (weather_query != 'true'){
-            return res.status(200).json({
-                data: {
-                    facebook: generic_message
-                }
-            })
+            return_res(res, generic_message);
         } else {
-            return res.status(200).json({
-                data: {
-                    facebook: {text: 'error'}
-                }
-            })}
+            return_res(res, {text: 'not weather'});
+        }
     } catch (err) {
         return res.status(400).json({
             status: "error",

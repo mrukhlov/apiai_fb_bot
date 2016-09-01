@@ -380,7 +380,8 @@ app.post('/webhook_apiai/', (req, res) => {
                         }
                     });
                 }
-            weather_query = 'false';
+                weather_query = 'false';
+                break;
         }
         console.log('end');
         console.log(weather_query);

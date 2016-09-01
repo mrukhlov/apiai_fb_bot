@@ -344,7 +344,7 @@ app.post('/webhook_apiai/', (req, res) => {
                     data: {
                         facebook: generic_message
                     }
-                })
+                });
                 break;
             case 'show_weather':
                 console.log('weather');

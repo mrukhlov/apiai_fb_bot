@@ -74,20 +74,6 @@ function processEvent(event) {
                     // facebook API limit for text length is 320,
                     // so we must split message if needed
                     var splittedText = splitResponse(responseText);
-                    /*switch (action){
-                     case 'show_prod':
-                     console.log('generic');
-                     async.eachSeries(splittedText, (textPart, callback) => {
-                     sendFBMessage(sender, {text: textPart}, callback);
-                     });
-                     sendFBMessage(sender, generic_message, null);
-                     break;
-                     default:
-                     console.log('default');
-                     async.eachSeries(splittedText, (textPart, callback) => {
-                     sendFBMessage(sender, {text: textPart}, callback);
-                     });
-                     }*/
                     async.eachSeries(splittedText, (textPart, callback) => {
                         sendFBMessage(sender, {text: textPart}, callback);
                     });
@@ -138,44 +124,6 @@ function chunkString(s, len) {
     //output = ['Length of param message[text] must be less than or equal to 320'];
     return output;
 }
-
-/*const generic_message = {
- attachment: {
- type: "template",
- payload: {
- template_type: "generic",
- elements: [{
- title: "rift",
- subtitle: "Next-generation virtual reality",
- item_url: "https://www.oculus.com/en-us/rift/",
- image_url: "http://messengerdemo.parseapp.com/img/rift.png",
- buttons: [{
- type: "web_url",
- url: "https://www.oculus.com/en-us/rift/",
- title: "Open Web URL"
- }, {
- type: "postback",
- title: "Call Postback",
- payload: "Payload for first bubble"
- }]
- }, {
- title: "touch",
- subtitle: "Your Hands, Now in VR",
- item_url: "https://www.oculus.com/en-us/touch/",
- image_url: "http://messengerdemo.parseapp.com/img/touch.png",
- buttons: [{
- type: "web_url",
- url: "https://www.oculus.com/en-us/touch/",
- title: "Open Web URL"
- }, {
- type: "postback",
- title: "Call Postback",
- payload: "Payload for second bubble"
- }]
- }]
- }
- }
- };*/
 
 function sendFBMessage(sender, messageData, callback) {
     //console.log(sender);
@@ -376,7 +324,6 @@ app.post('/webhook_apiai/', (req, res) => {
     };
 
     try {
-        //generic_message.push(HAWAIIAN_CHICKEN, CHICKEN_PEPPERONI, TROPICAL_CHICKEN, SPICY_TUNA);
         var data = JSONbig.parse(req.body);
         //console.log(data);
         switch(data.result.action){

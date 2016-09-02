@@ -365,8 +365,6 @@ app.post('/webhook_apiai/', (req, res) => {
                 }
             break;
             case 'show_weather':
-                console.log('weather');
-
                 if(isDefined(data.result.parameters['geo-city']) == true || isDefined(data.result.contexts.parameters['geo-city']) == true){
                     if (isDefined(data.result.parameters['geo-city']) == true) {
                         var city = data.result.parameters['geo-city'];

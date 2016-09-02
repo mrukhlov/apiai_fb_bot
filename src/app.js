@@ -249,9 +249,10 @@ app.post('/webhook/', (req, res) => {
 
 app.post('/webhook_apiai/', (req, res) => {
 
-    //var weather_query = new Boolean(false);
+    //setting variable for custom intent checkk
     var weather_query = false;
 
+    //creating custom fb formated message template
     const generic_message = {
         attachment: {
             type: "template",
@@ -262,6 +263,7 @@ app.post('/webhook_apiai/', (req, res) => {
         }
     };
 
+    //creating custom payload elements template for pizza webhook example
     var HAWAIIAN_CHICKEN = {
         title: "HAWAIIAN CHICKEN",
         subtitle: "Chicken meat, juicy pineapples and Mozzarella cheese on tomato pizza sauce.",
@@ -327,15 +329,13 @@ app.post('/webhook_apiai/', (req, res) => {
         var data = JSONbig.parse(req.body);
         //console.log(data);
         switch(data.result.action){
+            //check for intent action from requeset
             case 'show_pizza':
-                console.log('pizza');
+                //check if we receive parameters from intent
                 if(isDefined(data.result.parameters['pizza_type']) == true){
                     switch(data.result.parameters.pizza_type){
-                        case 'Margherita':
-                            generic_message.attachment.payload.elements[0].title = data.result.parameters.pizza_type;
-                            generic_message.attachment.payload.elements[0].image_url = "http://www.cbc.ca/inthekitchen/assets_c/2012/11/MargheritaPizza21-thumb-596x350-247022.jpg";
-                            break;
                         case 'HAWAIIAN CHICKEN':
+                            //customizing formated message template
                             generic_message.attachment.payload.elements = [];
                             generic_message.attachment.payload.elements.push(HAWAIIAN_CHICKEN);
                             generic_message.attachment.payload.elements[0].buttons[0].title = 'Go back';
@@ -361,23 +361,26 @@ app.post('/webhook_apiai/', (req, res) => {
                             break;
                     }
                 } else {
+                    //if we have no parameter in received query, send full template
                     generic_message.attachment.payload.elements.push(HAWAIIAN_CHICKEN, CHICKEN_PEPPERONI, TROPICAL_CHICKEN, SPICY_TUNA);
                 }
             break;
-            case 'show_weather':
+                //check if we get receive requested parameters from apiai request
                 if(isDefined(data.result.parameters['geo-city']) == true || isDefined(data.result.contexts.parameters['geo-city']) == true){
                     if (isDefined(data.result.parameters['geo-city']) == true) {
                         var city = data.result.parameters['geo-city'];
                     } else {
                         var city = data.result.parameters.contexts['geo-city'];
                     }
+                    //setting url for external request
                     var base_url = "https://query.yahooapis.com/v1/public/yql?" + "q=select+%2A+from+weather.forecast+where+woeid+in+%28select+woeid+from+geo.places%281%29+where+text%3D%27"+city+"%27%29" + "&format=json";
                     weather_query = true;
+                    //making request
                     request({
                         url: base_url,
                         method: 'GET',
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        contentType :'application/x-www-form-urlencoded',
+                        contentType :'application/x-www-form-urlencoded'
                     }, function(error, response, body){
                         if(error) {
                             console.log(error);
@@ -386,6 +389,7 @@ app.post('/webhook_apiai/', (req, res) => {
                                 error: error
                             });
                         } else {
+                            //process obtained data from external resource
                             var query = JSON.parse(body).query;
                             var results = query.results;
                             var channel = results.channel;
@@ -393,13 +397,15 @@ app.post('/webhook_apiai/', (req, res) => {
                             var location = channel.location;
                             var units = channel.units;
                             var condition = item.condition;
-                            //console.log(channel)
+                            //creating string
                             var string = "Today in " + location.city + ": " + condition.text + ", the temperature is " + condition.temp + " " + units.temperature
+                            //changind formated message template
                             generic_message.attachment.payload.elements[0].title = 'Weather in' + city;
                             generic_message.attachment.payload.elements[0].subtitle = string;
                             generic_message.attachment.payload.elements[0].item_url = channel.link;
                             generic_message.attachment.payload.elements[0].image_url = channel.image.url;
                             generic_message.attachment.payload.elements[0].buttons[0].url = channel.link;
+                            //return it formated to fb messenger
                             return res.status(200).json({
                                 data: {
                                     facebook: generic_message
